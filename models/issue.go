@@ -883,6 +883,7 @@ type IssuesOptions struct {
 	IsPull      bool
 	Labels      string
 	SortType    string
+	SearchText  string
 }
 
 // buildIssuesQuery returns nil if it foresees there won't be any value returned.
@@ -949,6 +950,10 @@ func buildIssuesQuery(opts *IssuesOptions) *xorm.Session {
 		}
 	}
 
+	if opts.SearchText != ""{
+		sess.And("(name like ? or content like ?)","%" + opts.SearchText + "%","%" + opts.SearchText + "%")
+	}
+	
 	return sess
 }
 

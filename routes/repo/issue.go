@@ -145,6 +145,7 @@ func issues(c *context.Context, isPullList bool) {
 
 	repo := c.Repo.Repository
 	selectLabels := c.Query("labels")
+	searchText := c.Query("search")
 	milestoneID := c.QueryInt64("milestone")
 	isShowClosed := c.Query("state") == "closed"
 	issueStats := models.GetIssueStats(&models.IssueStatsOptions{
@@ -183,6 +184,7 @@ func issues(c *context.Context, isPullList bool) {
 		IsPull:      isPullList,
 		Labels:      selectLabels,
 		SortType:    sortType,
+		SearchText:  searchText,
 	})
 	if err != nil {
 		c.Handle(500, "Issues", err)

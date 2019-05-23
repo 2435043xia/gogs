@@ -1,4 +1,12 @@
 <div class="ui compact small menu">
 	<a class="{{if .PageIsLabels}}active{{end}} item" href="{{.RepoLink}}/labels">{{.i18n.Tr "repo.labels"}}</a>
 	<a class="{{if .PageIsMilestones}}active{{end}} item" href="{{.RepoLink}}/milestones">{{.i18n.Tr "repo.milestones"}}</a>
+	<input id="search"/>
+	<button onclick="handleSearch()">搜索工单</button>
 </div>
+<script>
+	function handleSearch(){
+		var input = document.getElementById("search").value
+		window.location = "{{$.Link}}?type={{$.ViewType}}&state={{$.State}}&labels={{.ID}}&milestone={{$.MilestoneID}}&assignee={{$.AssigneeID}}&search="+input
+	}
+</script>
